@@ -689,24 +689,24 @@ local function add_video(s)
         append_property(s, "hwdec-current", {prefix="(硬解:", nl="", indent=" ",
                          no_prefix_markup=true, suffix=")"}, {no=true, [""]=true})
     end
-    append_property(s, "avsync", {prefix="A-V:"})
+    append_property(s, "avsync", {prefix="音频视频同步差距:"})
     if append_property(s, compat("decoder-frame-drop-count"),
                        {prefix="丢帧数:", suffix=" (解码器)"}) then
         append_property(s, compat("frame-drop-count"), {suffix=" (输出)", nl="", indent=""})
     end
-    if append_property(s, "display-fps", {prefix="显示器FPS:", suffix=" (指定)"}) then
+    if append_property(s, "display-fps", {prefix="显示器刷新率:", suffix=" (指定)"}) then
         append_property(s, "estimated-display-fps",
                         {suffix=" (估计)", nl="", indent=""})
     else
         append_property(s, "estimated-display-fps",
-                        {prefix="显示器FPS:", suffix=" (估计)"})
+                        {prefix="显示器刷新率:", suffix=" (估计)"})
     end
-    if append_property(s, compat("container-fps"), {prefix="FPS:", suffix=" (指定)"}) then
+    if append_property(s, compat("container-fps"), {prefix="视频帧率:", suffix=" (指定)"}) then
         append_property(s, "estimated-vf-fps",
-                        {suffix=" (估计)", nl="", indent=""})
+                        {suffix=" (估算)", nl="", indent=""})
     else
         append_property(s, "estimated-vf-fps",
-                        {prefix="FPS:", suffix=" (估计)"})
+                        {prefix="视频滤镜帧率:", suffix=" (估算)"})
     end
 
     append_display_sync(s)
