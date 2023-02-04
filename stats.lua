@@ -547,17 +547,17 @@ local function append_display_sync(s)
         return
     end
 
-    local vspeed = append_property(s, "video-speed-correction", {prefix="DS:"})
+    local vspeed = append_property(s, "video-speed-correction", {prefix="显示同步:"})
     if vspeed then
         append_property(s, "audio-speed-correction",
                         {prefix="/", nl="", indent=" ", prefix_sep=" ", no_prefix_markup=true})
     else
         append_property(s, "audio-speed-correction",
-                        {prefix="DS:" .. o.prefix_sep .. " - / ", prefix_sep=""})
+                        {prefix="显示同步:" .. o.prefix_sep .. " - / ", prefix_sep=""})
     end
 
-    append_property(s, "mistimed-frame-count", {prefix="Mistimed:", nl=""})
-    append_property(s, "vo-delayed-frame-count", {prefix="Delayed:", nl=""})
+    append_property(s, "mistimed-frame-count", {prefix="错时帧:", nl=""})
+    append_property(s, "vo-delayed-frame-count", {prefix="延迟帧:", nl=""})
 
     -- As we need to plot some graphs we print jitter and ratio on their own lines
     if not display_timer.oneshot and (o.plot_vsync_ratio or o.plot_vsync_jitter) and o.use_ass then
@@ -569,12 +569,12 @@ local function append_display_sync(s)
         if o.plot_vsync_jitter then
             jitter_graph = generate_graph(vsjitter_buf, vsjitter_buf.pos, vsjitter_buf.len, vsjitter_buf.max, nil, 0.8, 1)
         end
-        append_property(s, "vsync-ratio", {prefix="VSync Ratio:", suffix=o.prefix_sep .. ratio_graph})
-        append_property(s, "vsync-jitter", {prefix="VSync Jitter:", suffix=o.prefix_sep .. jitter_graph})
+        append_property(s, "vsync-ratio", {prefix="垂直同步比率:", suffix=o.prefix_sep .. ratio_graph})
+        append_property(s, "vsync-jitter", {prefix="垂直同步偏差:", suffix=o.prefix_sep .. jitter_graph})
     else
         -- Since no graph is needed we can print ratio/jitter on the same line and save some space
-        local vratio = append_property(s, "vsync-ratio", {prefix="VSync Ratio:"})
-        append_property(s, "vsync-jitter", {prefix="VSync Jitter:", nl="" or o.nl})
+        local vratio = append_property(s, "vsync-ratio", {prefix="垂直同步比率:"})
+        append_property(s, "vsync-jitter", {prefix="垂直同步偏差:", nl="" or o.nl})
     end
 end
 
@@ -637,7 +637,7 @@ local function add_file(s)
     local ed_cond = (edition and editions > 1)
     if ed_cond then
         append_property(s, "edition-list/" .. tostring(edition) .. "/title",
-                       {prefix="Edition:"})
+                       {prefix="版本:"})
         append_property(s, "edition-list/count",
                         {prefix="(" .. tostring(edition + 1) .. "/", suffix=")", nl="",
                          indent=" ", prefix_sep=" ", no_prefix_markup=true})
